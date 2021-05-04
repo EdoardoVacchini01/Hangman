@@ -1,66 +1,34 @@
 package console;
 import hangman.Player;
 import hangman.Game;
+import hangman.GameResult;
 
 import java.io.*;
 
 public class NetPlayer extends LocalPlayer{
-	    
-    BufferedReader console;
+
+    private BufferedReader in;
+    private PrintWriter out;
     
-    public NetPlayer() {
-        console = new BufferedReader(new InputStreamReader(System.in));
+    public NetPlayer(BufferedReader in, PrintWriter out) {
+		this.in = in;
+		this.out = out;
     }
     
     @Override
     public void update(Game game) {
         switch(game.getResult()) {
             case FAILED:
-                printBanner("Hai perso!  La parola da indovinare era '" +
-                            game.getSecretWord() + "'");
+                out.println("" + GameResult.FAILED + "," + game.getSecretWord());
                 break;
             case SOLVED:
-                printBanner("Hai indovinato!   (" + game.getSecretWord() + ")");
+            	out.println("" + GameResult.SOLVED + "," + game.getSecretWord());
                 break;
             case OPEN:
                 int rem = Game.MAX_FAILED_ATTEMPTS - game.countFailedAttempts();
-                System.out.print("\n" + rem + " tentativi rimasti\n");
-                System.out.println(this.gameRepresentation(game));
-                System.out.println(game.getKnownLetters());
+                out.println("" + GameResult.OPEN+"," + game.getKnownLetters() + "," + rem);
                 break;
         }
-    }
-
-    private String gameRepresentation(Game game) {
-    	/**
-        int a = game.countFailedAttempts();
-        
-        String s = "   ___________\n  /       |   \n  |       ";
-        s += (a == 0 ? "\n" : "O\n");
-        s += "  |     " + (a == 0 ? "\n" : (a < 5
-                ? "  +\n"
-                : (a == 5 ? "--+\n" : "--+--\n")));
-        s += "  |       " + (a < 2 ? "\n" : "|\n");
-        s += "  |      " + (a < 3 ? "\n" : (a == 3 ? "/\n" : "/ \\\n"));
-        s += "  |\n================\n";
-        return s;
-        **/
-    	
-    	return null;
-    }
-    
-    private void printBanner(String message) {
-    	/**
-        System.out.println("");
-        for (int i = 0; i < 80; i++)
-            System.out.print("*");
-        System.out.println("\n***  " + message);
-        for (int i = 0; i < 80; i++)
-            System.out.print("*");
-        System.out.println("\n");
-        **/
-    	
-    	
     }
 
     /**
@@ -71,23 +39,17 @@ public class NetPlayer extends LocalPlayer{
      */
     @Override
     public char chooseLetter(Game game) {
-    	/**
         for (;;) {
-            System.out.print("Inserisci una lettera: ");
+            out.println("WAITING_FOR_ATTEMPT");
             String line = null;
             try {
-                line = console.readLine().trim();
+                line = in.readLine().split(",")[1].trim();
             } catch (IOException e) {
                 line = "";
             }
-            if (line.length() == 1 && Character.isLetter(line.charAt(0))) {
+            if (line.length() == 1 && Character.isLetter(line.charAt(0))) 
                 return line.charAt(0);
-            } else {
-                System.out.println("Lettera non valida.");
-            }
         }
-        **/
-    	
     }
 
 }
