@@ -7,7 +7,6 @@
  */
 package console;
 
-import hangman.ArtificialPlayer;
 import hangman.Hangman;
 import hangman.Player;
 

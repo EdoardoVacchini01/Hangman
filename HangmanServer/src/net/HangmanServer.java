@@ -20,6 +20,7 @@ public class HangmanServer {
 	public static void main(String[] args) {
 		int port = 8888;
 		ServerSocket serverSocket = null;
+		int clientId = 0;
 
 		try {
 			serverSocket = new ServerSocket(port);
@@ -31,7 +32,7 @@ public class HangmanServer {
 		while (true) {
 			try {
 				Socket socket = serverSocket.accept();
-				ClientHandler clientHandler = new ClientHandler(socket);
+				ClientHandler clientHandler = new ClientHandler(socket, clientId++);
 				clientHandler.start();
 			} catch (Exception e) {
 				e.printStackTrace();

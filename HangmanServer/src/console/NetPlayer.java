@@ -44,7 +44,7 @@ public class NetPlayer extends LocalPlayer{
             try {
                 line = in.readLine().split(",")[1].trim();
             } catch (IOException e) {
-                line = "";
+                throw new ConnectionIOException();
             }
             if (line.length() == 1 && Character.isLetter(line.charAt(0))) 
                 return line.charAt(0);
