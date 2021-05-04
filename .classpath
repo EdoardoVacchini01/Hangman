@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="HangmanServer/src"/>
-<<<<<<< HEAD
     <classpathentry kind="src" path="HangmanClient/src"/>
-=======
->>>>>>> fde36b65293e6aba9b1b5f78e418928965174b6c
 	<classpathentry kind="output" path="bin"/>
 </classpath>
