@@ -18,3 +18,8 @@ hs_err_pid*
 .idea
 *.iml
 /bin/
+<<<<<<< HEAD
+
+.project
+=======
+>>>>>>> fde36b65293e6aba9b1b5f78e418928965174b6c
