@@ -5,17 +5,42 @@
  */
 package net;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.*;
+
 /**
  *
  * @author Claudio Cusano <claudio.cusano@unipv.it>
  */
 public class HangmanServer {
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    @SuppressWarnings("resource")
+	public static void main(String[] args) {
+    	int port = 8888;
+    	ServerSocket serverSocket = null;
+    	Socket socket = null;
+    	
+    	
+    	try {
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    	
+		while(true) {
+	    	try {
+				socket = serverSocket.accept();
+		    	ClientHandler clientHandler = new ClientHandler(socket);
+				clientHandler.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
     }
     
 }
