@@ -1,5 +1,4 @@
 package console;
-import hangman.Player;
 import hangman.Game;
 import hangman.GameResult;
 
@@ -26,7 +25,7 @@ public class NetPlayer extends LocalPlayer{
                 break;
             case OPEN:
                 int rem = Game.MAX_FAILED_ATTEMPTS - game.countFailedAttempts();
-                out.println("" + GameResult.OPEN+"," + game.getKnownLetters() + "," + rem);
+                out.println("" + GameResult.OPEN + "," + game.getKnownLetters() + "," + rem);
                 break;
         }
     }
